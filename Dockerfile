@@ -21,18 +21,12 @@ COPY irissession.sh /
 SHELL ["/irissession.sh"]
 
 RUN \
-  do $SYSTEM.OBJ.Load("Installer.cls", "ck") \
+  do $SYSTEM.OBJ.Load("Installer.cls", "ck",,1) \
   set sc = ##class(App.Installer).setup() \
-  zn "%SYS" \
-  write "Create web application ..." \
-  set webName = "/crud" \
-  set webProperties("DispatchClass") = "Sample.PersonREST" \
-  set webProperties("NameSpace") = "IRISAPP" \
-  set webProperties("Enabled") = 1 \
-  set webProperties("AutheEnabled") = 32 \
-  set sc = ##class(Security.Applications).Create(webName, .webProperties) \
-  write sc \
-  write "Web application "_webName_" has been created!"
+  zn "IRISAPP" \
+  zpm "install restforms2" \
+  do $SYSTEM.OBJ.LoadDir("src", "ck") \
+  do ##class(Form.Util.Init).populateTestForms()
 
 # bringing the standard shell back
 SHELL ["/bin/bash", "-c"]

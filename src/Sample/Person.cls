@@ -1,5 +1,13 @@
-Class Sample.Person Extends (%Persistent, %JSON.Adaptor, %Populate)
+Class Sample.Person Extends (%Persistent, %JSON.Adaptor, %Populate, Form.Adaptor)
 {
+
+Parameter FORMNAME = "Cast";
+
+Parameter OBJPERMISSIONS As %String = "CRUD";
+
+Parameter DISPLAYPROPERTY As %String = "Name";
+
+Parameter FORMORDERBY As %String = "Name";
 
 Property Name As %VarString;
 

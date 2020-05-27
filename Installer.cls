@@ -11,7 +11,6 @@ XData setup
     <Configuration>
       <Database Name="IRISAPP" Dir="/opt/irisapp/data" Create="yes"/>
     </Configuration>
-    <Import File="${SourceDir}" Flags="ck" Recurse="1"/>
   </Namespace>
 
 </Manifest>
@@ -21,6 +20,12 @@ ClassMethod setup(ByRef pVars, pLogLevel As %Integer = 3, pInstaller As %Install
 {
   #; Let XGL document generate code for this method. 
   Quit ##class(%Installer.Manifest).%Generate(%compiledclass, %code, "setup")
+}
+
+ClassMethod InstallModules() As %Status
+{
+  write "ZPM install"
+  //do ##class(%ZPM.PackageManager).Shell("install restforms2")
 }
 
 }
