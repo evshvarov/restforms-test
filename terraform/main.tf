@@ -54,7 +54,7 @@ provider "google" {
 }
 
 resource "google_container_cluster" "gke-cluster" {
-  name                     = "got-cluster"
+  name                     = "restforms-test-cluster"
   location                 = "europe-west1-b"
   remove_default_node_pool = true
   # In regional cluster (location is region, not zone) this is a number of nodes per zone
