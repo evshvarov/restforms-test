@@ -25,6 +25,7 @@ RUN \
   set sc = ##class(App.Installer).setup() \
   zn "IRISAPP" \
   zpm "install restforms2" \
+  zpm "install swagger-ui"\
   do $SYSTEM.OBJ.LoadDir("src", "ck") \
   do ##class(Form.Util.Init).populateTestForms()
 
