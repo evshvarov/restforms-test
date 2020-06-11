@@ -27,7 +27,15 @@ RUN \
   zpm "install restforms2" \
   zpm "install swagger-ui"\
   do $SYSTEM.OBJ.LoadDir("src", "ck") \
-  do ##class(Form.Util.Init).populateTestForms()
+  do ##class(Form.Util.Init).populateTestForms() \
+  zn "%SYS" \
+  write "Modify MDX2JSON application security...",! \
+  set webName = "/forms" \
+  set webProperties("AutheEnabled") = 96 \
+  set webProperties("MatchRoles")=":%DB_IRISAPP" \
+  set sc = ##class(Security.Applications).Modify(webName, .webProperties) \
+  if sc<1 write $SYSTEM.OBJ.DisplayError(sc) \
+
 
 # bringing the standard shell back
 SHELL ["/bin/bash", "-c"]
