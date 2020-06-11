@@ -1,9 +1,4 @@
-## intersystems-iris-docker-rest-template
-This is a template of a REST API application built with ObjectScript in InterSystems IRIS.
-It also has OPEN API spec, 
-can be developed with Docker and VSCode,
-can ve deployed as ZPM module.
-
+## restforms-test
 ## Prerequisites
 Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [Docker desktop](https://www.docker.com/products/docker-desktop) installed.
 
