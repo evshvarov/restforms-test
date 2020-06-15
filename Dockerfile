@@ -12,21 +12,23 @@ USER root
 
 WORKDIR /opt/irisapp
 RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /opt/irisapp
+COPY irissession.sh /
+RUN chmod +x /irissession.sh 
 
 USER irisowner
 
 COPY  Installer.cls .
 COPY  src src
-COPY irissession.sh /
 SHELL ["/irissession.sh"]
 
 RUN \
   do $SYSTEM.OBJ.Load("Installer.cls", "ck",,1) \
   set sc = ##class(App.Installer).setup() \
+  # if sc<1 write $SYSTEM.OBJ.DisplayError(sc) \
   zn "IRISAPP" \
   zpm "install restforms2" \
   zpm "install swagger-ui"\
-  do $SYSTEM.OBJ.LoadDir("src", "ck") \
+  #; do manual source load and compile 
   do ##class(Form.Util.Init).populateTestForms() \
   zn "%SYS" \
   write "Modify forms application security...",! \
@@ -34,9 +36,10 @@ RUN \
   set webProperties("AutheEnabled") = 32 \
   set webProperties("MatchRoles")=":%DB_%DEFAULT" \
   set sc = ##class(Security.Applications).Modify(webName, .webProperties) \
+  # if sc<1 write $SYSTEM.OBJ.DisplayError(sc) \
+  write "Add Role for CSPSystem User...",! \
+  set sc=##class(Security.Users).AddRoles("CSPSystem","%DB_%DEFAULT") \
   if sc<1 write $SYSTEM.OBJ.DisplayError(sc) \
-
-
-# bringing the standard shell back
+ # bringing the standard shell back
 SHELL ["/bin/bash", "-c"]
 CMD [ "-l", "/usr/irissys/mgr/messages.log" ]
