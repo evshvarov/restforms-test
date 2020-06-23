@@ -28,6 +28,7 @@ RUN \
   zn "IRISAPP" \
   zpm "install restforms2" \
   zpm "install swagger-ui"\
+  zpm "install restforms2-ui" \
   #; do manual source load and compile 
   do ##class(Form.Util.Init).populateTestForms() \
   zn "%SYS" \
