@@ -30,6 +30,7 @@ RUN \
   zpm "install swagger-ui"\
   zpm "install restforms2-ui" \
   #; do manual source load and compile 
+  do $System.OBJ.LoadDir("/opt/irisapp/src","ck",,1) \
   do ##class(Form.Util.Init).populateTestForms() \
   zn "%SYS" \
   write "Modify forms application security...",! \
