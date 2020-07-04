@@ -29,6 +29,7 @@ RUN \
   zpm "install restforms2" \
   zpm "install swagger-ui"\
   zpm "install restforms2-ui" \
+  zpm "install webterminal" \
   #; do manual source load and compile 
   do $System.OBJ.LoadDir("/opt/irisapp/src","ck",,1) \
   do ##class(Form.Util.Init).populateTestForms() \
